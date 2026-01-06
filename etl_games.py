@@ -77,9 +77,63 @@ def salvar_dados(df):
     df.to_csv(ARQUIVO_SAIDA, index=False)
     print(f" Arquivo '{ARQUIVO_SAIDA}' salvo com sucesso!")
 
+def exibir_tabela(df):
+    """
+    Função auxiliar apenas para mostrar a lista bonita na tela
+    """
+    print("-" * 35)
+    # O :<5 significa: reserve 5 espaços e alinhe à esquerda
+    print(f"{'ID':<5} | {'NICKNAME'}") 
+    print("-" * 35)
+    
+    for index, linha in df.iterrows():
+        # Imprime cada linha alinhada
+        print(f"{linha['id']:<5} | {linha['nickname']}")
+    
+    print("-" * 35)
+
+def iniciar_sistema_consulta(df):
+    print("\n" + "="*40)
+    print("SISTEMA DE MENSAGENS INICIADO")
+    print("="*40)
+    
+    # Mostra a lista de opções logo de cara
+    exibir_tabela(df)
+
+    print("\nDigite o ID do jogador para ver a mensagem")
+    print("(Ou digite '0' para sair)")
+
+    while True:
+        try:
+            id_busca = int(input("\nDigite o ID do Jogador: "))
+            
+            if id_busca == 0:
+                print("Encerrando sistema. Ate mais!")
+                break
+            
+            # Filtro
+            jogador_encontrado = df[df['id'] == id_busca]
+            
+            if not jogador_encontrado.empty:
+                nome = jogador_encontrado.iloc[0]['nickname']
+                msg = jogador_encontrado.iloc[0]['mensagem_enviada']
+                game = jogador_encontrado.iloc[0]['jogo_principal']
+                
+                print(f"\nJOGADOR: {nome} ({game})")
+                print(f"MENSAGEM: {msg}")
+            else:
+                print("ID nao encontrado. Verifique a tabela acima.")
+                
+        except ValueError:
+            print("Erro: Por favor, digite apenas numeros.")
+            
+# Executor
 if __name__ == "__main__":
     tabela = carregar_dados()
     
     if tabela is not None:
         tabela_transformada = processar_dados(tabela)
         salvar_dados(tabela_transformada)
+        
+        # Chama o menu
+        iniciar_sistema_consulta(tabela_transformada)
