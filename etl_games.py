@@ -22,17 +22,26 @@ def carregar_dados():
 def gerar_mensagem(nickname, status, jogo):
     if status == 'Online': # Online
         frases = [
-            f"Ei {nickname}, que da hora que está jogando o {jogo}.",
-            f"O {jogo} é top demais! Entra aí no discord {nickname}, bora trocar uma ideia!",
+            f"Ei {nickname}, que da hora que você está jogando {jogo}!",
+            f"O {jogo} é top demais! Aproveita a jogatina, {nickname}!",
+            f"Hoje é dia de fazer história no {jogo}, hein {nickname}?",
+            f"Modo foco ativado! Destrói tudo no {jogo}, {nickname}!",
+            f"Aproveita que está ON e farma muito XP no {jogo}, {nickname}!"
         ]
     elif status == 'Ausente': # Ausente
         frases = [
-            f"{nickname}, volta aqui!"
+            f"{nickname}, volta aqui! O {jogo} não se joga sozinho.",
+            f"Foi buscar um café, {nickname}? O {jogo} te espera!",
+            f"Recarregando as energias para voltar com tudo no {jogo}, {nickname}?",
+            f"Cochilo tático? Não esquece de salvar o progresso no {jogo}, {nickname}!"
         ]
     else: # Offline
         frases = [
             f"Sdds de você no {jogo}, {nickname}...",
             f"Quando voltar, avisa a gente para jogar {jogo} junto se der!",
+            f"Faz tempo que não vejo suas skills no {jogo}, {nickname}.",
+            f"Tudo pronto para o seu retorno lendario ao {jogo}, {nickname}?",
+            f"O servidor (ou o save) de {jogo} sente sua falta, {nickname}!"
         ]
     
     return random.choice(frases)
